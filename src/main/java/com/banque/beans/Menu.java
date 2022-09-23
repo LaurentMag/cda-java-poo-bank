@@ -8,36 +8,66 @@ public class Menu {
     GestionCompte gestion = new GestionCompte();
 
     // ------------------------------------------------------------------------
-    public void getAccountList() {
-        System.out.println("===== Afficher Liste de compte =====");
+    // MAIN MENU
+    public void display() {
 
-        boolean stopLoop = false;
+        System.out.println("===== MENU =====");
 
-        while (!stopLoop) {
+        boolean correct = false;
+        while (!correct) {
 
-
-            boolean done = false;
-
-            while(!done) {
+            try {
+                System.out.println("Choississez : ");
+                System.out.println("1 - Gestion de comptes");
+                System.out.println("2 - Créer un client");
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Afficher et séléctionner un : ");
-                System.out.println("1 - Compte courant");
-                System.out.println("2 - Compte épargne (not aviable for now)");
-                System.out.println("3 - Compte rémunéré (not aviable for now)");
-
                 int choice = scanner.nextInt();
-                if(choice == 1) {
+                if (choice == 1) {
+                    this.accountManagement();
 
-                    gestion.affichageEtSelectionCourant();
-                    done = true;
-                    stopLoop = true;
+                } else if (choice == 2) {
+                    this.clientCreation();
+
+                } else {
+                    throw new Exception("Main menu wrong choice :");
                 }
+            } catch (Exception e) {
+                // System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + "\n" + "Veillez recommencer" + "\n");
             }
-
         }
     }
 
     // ------------------------------------------------------------------------
+    // ACCOUNT MANAGEMENT :
+    public void accountManagement() throws Exception {
+        System.out.println("===== Gestion de comptes =====");
+
+        boolean accountCorrect = false;
+        while (!accountCorrect) {
+
+            System.out.println("Choississez : ");
+            System.out.println("1 - Créer un compte");
+            System.out.println("2 - Afficher la liste des comptes");
+            Scanner scanner = new Scanner(System.in);
+            int accountChoice = scanner.nextInt();
+            if (accountChoice == 1) {
+                System.out.println("creation de compte");
+                accountCreation();
+
+            } else if (accountChoice == 2) {
+                System.out.println("Afficher Liste de compte");
+                this.getAccountList();
+                accountCorrect = true;
+
+            } else {
+                throw new Exception("account management incorrect choice :");
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // ACCOUNT CREATION
     public void accountCreation() throws Exception {
         System.out.println("===== Creation de compte =====");
 
@@ -73,37 +103,43 @@ public class Menu {
                 this.display();
 
             } else {
-                throw new Exception("create account wrong choice :");
+                throw new Exception("create account incorrect choice :");
             }
         }
     }
 
     // ------------------------------------------------------------------------
-    public void accountManagement() throws Exception {
-        System.out.println("===== Gestion de comptes =====");
+    // GET ACCOUNT LIST
+    public void getAccountList() throws Exception  {
+        System.out.println("===== Afficher Liste de compte =====");
 
-        boolean accountCorrect = false;
-        while (!accountCorrect) {
+        boolean stopLoop = false;
 
-            System.out.println("Choississez : ");
-            System.out.println("1 - Créer un compte");
-            System.out.println("2 - Afficher la liste des comptes");
-            Scanner scanner = new Scanner(System.in);
-            int accountChoice = scanner.nextInt();
-            if (accountChoice == 1) {
-                System.out.println("creation de compte");
-                accountCreation();
+        while (!stopLoop) {
 
-            } else if (accountChoice == 2) {
-                System.out.println("Afficher Liste de compte");
-                this.getAccountList();
-                accountCorrect = true;
 
-            } else {
-                throw new Exception("account management wrong choice :");
+            boolean done = false;
+
+            while(!done) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Afficher et séléctionner un : ");
+                System.out.println("1 - Compte courant");
+                System.out.println("2 - Compte épargne (not aviable for now)");
+                System.out.println("3 - Compte rémunéré (not aviable for now)");
+
+                int choice = scanner.nextInt();
+                if(choice == 1) {
+                    gestion.affichageEtSelectionCourant();
+                    done = true;
+                    stopLoop = true;
+                } else {
+                    throw new Exception("Account list incorrect choice");
+                }
             }
+
         }
     }
+
 
     // ------------------------------------------------------------------------
     public void clientCreation() throws Exception  {
@@ -121,38 +157,10 @@ public class Menu {
             if (choice == 0) {
                 this.display();
             } else {
-                throw new Exception("Client creation wrong choice :");
+                throw new Exception("Client creation incorrect choice :");
             }
         }
     }
 
-    // ------------------------------------------------------------------------
-    public void display() {
 
-        System.out.println("===== MENU =====");
-
-        boolean correct = false;
-        while (!correct) {
-
-            try {
-                System.out.println("Choississez : ");
-                System.out.println("1 - Gestion de comptes");
-                System.out.println("2 - Créer un client");
-                Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
-                if (choice == 1) {
-                    this.accountManagement();
-
-                } else if (choice == 2) {
-                    this.clientCreation();
-
-                } else {
-                    throw new Exception("Main menu wrong choice :");
-                }
-            } catch (Exception e) {
-                // System.out.println(e.getMessage());
-                System.out.println("Choix inconnu" + "\n" + "Veillez recommencer" + "\n");
-            }
-        }
-    }
 }

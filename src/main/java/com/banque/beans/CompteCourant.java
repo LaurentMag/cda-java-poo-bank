@@ -17,7 +17,7 @@ public class CompteCourant extends Compte {
 
     @Override
     public int getId() {
-        return 0;
+        return this.id;
     }
 
     @Override
