@@ -14,11 +14,25 @@ public class Menu {
         boolean stopLoop = false;
 
         while (!stopLoop) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Afficher la list des : ");
-            System.out.println("1 - Compte courant");
-            System.out.println("2 - Compte épargne");
-            System.out.println("3 - Compte rémunéré");
+
+
+            boolean done = false;
+
+            while(!done) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Afficher et séléctionner un : ");
+                System.out.println("1 - Compte courant");
+                System.out.println("2 - Compte épargne (not aviable for now)");
+                System.out.println("3 - Compte rémunéré (not aviable for now)");
+
+                int choice = scanner.nextInt();
+                if(choice == 1) {
+
+                    gestion.affichageEtSelectionCourant();
+                    done = true;
+                    stopLoop = true;
+                }
+            }
 
         }
     }
@@ -37,6 +51,7 @@ public class Menu {
             System.out.println("Indiquer le solde du compte : ");
             int solde = scanner.nextInt();
 
+
             System.out.println("Type de compte a créer : ");
             System.out.println("1 - Compte courant");
             System.out.println("2 - Compte épargne");
@@ -44,14 +59,19 @@ public class Menu {
 
             int createChoice = scanner.nextInt();
             if (createChoice == 1) {
-                gestion.createAccountCurrent(id, solde);
-                stoploop = true;
+                System.out.println("Indiquer le decouvert autorisé: ");
+                int decouvert = scanner.nextInt();
+                gestion.createAccountCurrent(id, solde, decouvert);
+                this.display();
+
             } else if (createChoice == 2) {
                 gestion.createAccountSaving(id, solde);
-                stoploop = true;
+                this.display();
+
             } else if (createChoice == 3) {
                 gestion.createAccountRemunerated(id, solde);
-                stoploop = true;
+                this.display();
+
             } else {
                 throw new Exception("create account wrong choice :");
             }
@@ -73,10 +93,12 @@ public class Menu {
             if (accountChoice == 1) {
                 System.out.println("creation de compte");
                 accountCreation();
-                accountCorrect = true;
+
             } else if (accountChoice == 2) {
                 System.out.println("Afficher Liste de compte");
+                this.getAccountList();
                 accountCorrect = true;
+
             } else {
                 throw new Exception("account management wrong choice :");
             }
@@ -84,8 +106,24 @@ public class Menu {
     }
 
     // ------------------------------------------------------------------------
-    public void clientCreation() {
+    public void clientCreation() throws Exception  {
+
         System.out.println("===== Creation de Client =====");
+
+        boolean done = false;
+        while (!done) {
+            System.out.println(" can't create client for now ☹️ ");
+            System.out.println("");
+            System.out.println("0 - retour : ");
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            if (choice == 0) {
+                this.display();
+            } else {
+                throw new Exception("Client creation wrong choice :");
+            }
+        }
     }
 
     // ------------------------------------------------------------------------
@@ -104,10 +142,10 @@ public class Menu {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
                     this.accountManagement();
-                    correct = true;
+
                 } else if (choice == 2) {
                     this.clientCreation();
-                    correct = true;
+
                 } else {
                     throw new Exception("Main menu wrong choice :");
                 }

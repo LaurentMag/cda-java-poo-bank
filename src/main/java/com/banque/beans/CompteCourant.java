@@ -2,8 +2,11 @@ package com.banque.beans;
 
 public class CompteCourant extends Compte {
 
-    public CompteCourant(int id, int solde) {
+    protected int allowedOverdraft;
+
+    public CompteCourant(int id, int solde, int overdraft) {
         super(id, solde);
+        this.allowedOverdraft = overdraft;
     }
 
 
@@ -32,6 +35,20 @@ public class CompteCourant extends Compte {
 
     }
 
+    public int getAllowedOverdraft() {
+        return allowedOverdraft;
+    }
 
+    public void setAllowedOverdraft(int allowedOverdraft) {
+        this.allowedOverdraft = allowedOverdraft;
+    }
 
+    @Override
+    public String toString() {
+        return "CompteCourant{" +
+                ", id=" + id +
+                ", solde=" + solde +
+                "allowedOverdraft=" + allowedOverdraft +
+                '}';
+    }
 }
