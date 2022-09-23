@@ -45,10 +45,10 @@ public class CompteCourant extends Compte {
 
     @Override
     public String toString() {
-        return "CompteCourant{" +
-                ", id=" + id +
-                ", solde=" + solde +
-                "allowedOverdraft=" + allowedOverdraft +
-                '}';
+        return "CompteCourant : " +
+                " | Id : " + id  +
+                " | Solde : " + solde +
+                " | Découvert : " + allowedOverdraft;
+
     }
 }

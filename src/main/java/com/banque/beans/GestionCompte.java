@@ -37,7 +37,15 @@ public class GestionCompte {
         CompteRemu compte = new CompteRemu(id, solde);
         this.listCompteRemu.add(compte);
 
-        System.out.println("le compte crée est : " + compte);
+        System.out.println("le compte crée est : " +compte);
+    }
+
+    // ------------------------------------------------------------------------
+    public void affichageEtSelectionCourant() {
+        for (int i = 0; i < this.listCompteCourant.size(); i++) {
+            System.out.println(i + " - " +  this.listCompteCourant.get(i).toString());
+        }
+        this.accountOperation(this.listCompteCourant);
     }
 
     // ------------------------------------------------------------------------
@@ -51,31 +59,15 @@ public class GestionCompte {
 
             Scanner scanner = new Scanner(System.in);
             int selected = scanner.nextInt();
-            System.out.println("Selectionner une operation : ");
             if (selected < liste.size()) {
                 correctChoice = true;
 
-                System.out.println("Le compte séléctionné est : " +
-                        "id : " + this.listCompteCourant.get(selected).getId() +
-                        " Solde : " + this.listCompteCourant.get(selected).getSolde() +
-                        " Découvert : " + this.listCompteCourant.get(selected).getAllowedOverdraft());
+                System.out.println("Le compte séléctionné : " + "\n" + liste.get(selected));
             } else {
                 System.out.println("Ce compte n'existe pas, recommencez : ");
             }
         }
     }
-
-    // ------------------------------------------------------------------------
-    public void affichageEtSelectionCourant() {
-        for (int i = 0; i < this.listCompteCourant.size(); i++) {
-            System.out.println(i + "- compte " + "id : " +
-                    this.listCompteCourant.get(i).getId() +
-                    " Solde : " + this.listCompteCourant.get(i).getSolde() +
-                    " Découvert : " + this.listCompteCourant.get(i).getAllowedOverdraft());
-        }
-        this.accountOperation(this.listCompteCourant);
-    }
-
 
     // ------------------------------------------------------------------------
     public void getListCompteCourant() {
