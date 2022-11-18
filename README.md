@@ -1,4 +1,4 @@
 # cda-java-poo-bank
-java POO training project
+first java POO training project
 
-licence : CC-BY-NC
+for now : only menu working, no logic added.
